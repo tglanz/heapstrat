@@ -1,0 +1,5 @@
+-lib heaps
+-main Main
+-debug
+-js ../build/app.js
+--cwd ./src
