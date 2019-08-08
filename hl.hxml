@@ -1,5 +1,7 @@
 -lib heaps
 -lib hlsdl
+-D windowSize=1366x768
+-D resourcesPath=../res
 -main Main
 -hl ../build/app.hl
 --cwd ./src

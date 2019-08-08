@@ -1,0 +1,77 @@
+// import h2d.TileGroup;
+// import hxd.res.TiledMap;
+// import h2d.Tile;
+
+// typedef TiledMapData = { 
+//     layers: Array<{ 
+//         data:Array<Int>
+//     }>, 
+//     tilewidth: Int, 
+//     tileheight: Int, 
+//     width: Int,
+//     height:Int
+// };
+
+// class TilesMap {
+
+//     var horizontalTiles: Int;
+//     var verticalTiles: Int;
+
+//     var tileWidth: Int;
+//     var tileHeight: Int;
+
+//     var layers: Array<{
+//         tiles: Array<Int>
+//     }>;
+// }
+
+// class Main extends hxd.App {
+
+// 	override function init() {
+//         super.init();
+// 	}
+
+// 	// on each frame
+// 	override function update(dt: Float) {
+//         // parse Tiled json file
+// 		var mapData:TiledMapData = haxe.Json.parse(hxd.Res.desert_map1_json.entry.getText());
+		
+// 		// get tile image (tiles.png) from resources
+// 		var imageTexture  = hxd.Res.desert_tileset_png.toTexture();
+
+//         var imageTile = Tile.fromTexture(imageTexture);
+		
+// 		// create a TileGroup for fast tile rendering, attach to 2d scene
+// 		var group = new h2d.TileGroup(imageTile, s2d);
+		
+// 		var tw = mapData.tilewidth;
+// 		var th = mapData.tileheight;
+// 		var mw = mapData.width;
+// 		var mh = mapData.height;
+		
+// 		// make sub tiles from tile
+// 		var tiles = [
+// 			 for(y in 0 ... Std.int(imageTile.height / th))
+// 			 for(x in 0 ... Std.int(imageTile.width / tw))
+// 			 imageTile.sub(x * tw, y * th, tw, th)
+// 		];
+		
+// 		// iterate on all layers
+// 		for(layer in mapData.layers) {
+// 			// iterate on x and y
+// 			for(y in 0 ... mh) for (x in 0 ... mw) {
+// 				// get the tile id at the current position 
+// 				var tid = layer.data[x + y * mw];
+// 				if (tid != 0) { // skip transparent tiles
+// 					// add a tile to the TileGroup
+// 					group.add(x * tw, y * mapData.tilewidth, tiles[tid - 1]);
+// 				}
+// 			}
+// 		}
+// 	}
+
+// 	static function main() {
+//         hxd.Res.initEmbed();
+// 		new Main();
+// 	}
+// }

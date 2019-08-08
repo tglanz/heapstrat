@@ -1,15 +1,34 @@
-import hxd.App;
-import hxd.res.DefaultFont;
+class Main extends hxd.App {
 
-class Main extends App {
+	var gameData: states.GameData;
+    var statesManager: states.Core.Manager<states.GameData>;
 
-    override function init() {
-        // create a text component, and add it to the 2d scene (s2d)
-        var tf = new h2d.Text(DefaultFont.get(), s2d);
-        tf.text = "Hi!";
-    }
+	override function init() {
+        super.init();
+		
+		gameData = new states.GameData(s2d);
+        statesManager = new states.Core.Manager(
+			gameData,
+			new states.OnBoardState());
+	}
 
-    static function main() {
-        new Main();
-    }
+	// on each frame
+	override function update(dt: Float) {
+        statesManager.update(dt);
+
+		if (statesManager.isExhausted()) {
+			super.dispose();
+			Sys.exit(1);
+		}
+	}
+
+	override function onResize() {
+		super.onResize();
+		statesManager.onResize();
+	}
+
+	static function main() {
+        hxd.Res.initEmbed();
+		new Main();
+	}
 }
